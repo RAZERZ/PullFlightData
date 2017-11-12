@@ -1,5 +1,5 @@
 <form action="" method="post">
-    <input type="text" name="ICAO">
+    Arrival ICAO to pull data from: <input type="text" name="ICAO">
 </form>
 
 <?php
@@ -7,8 +7,8 @@
 if(isset($_POST['ICAO'])) {
     $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "yourFlightAwareUserID";
-    $apiKey = "yourFlightAwareAPiKey";
+    $apiUserId = "ramiabouzahra";
+    $apiKey = "3ee192cefd59fb45b068a0a5e16a90fcffe0685a";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
@@ -56,8 +56,7 @@ foreach($flightsArray as $flight) {
             'howMany' => 1
         );
         
-        echo ${"callsign$x"} . " ";
-    
+            
 $flightInfoStatus = $apiUrl . 'FlightInfoStatus?' . http_build_query($queryArray);
         $ch1 = curl_init($flightInfoStatus);
         curl_setopt($ch1, CURLOPT_USERPWD, $apiUserId . ':' . $apiKey);
@@ -65,9 +64,7 @@ $flightInfoStatus = $apiUrl . 'FlightInfoStatus?' . http_build_query($queryArray
         $flightInfoStatusResult = curl_exec($ch1);
         curl_close($ch1);
         $flightInfoStatusDecode = json_decode($flightInfoStatusResult, true);
-        
-        print_r($flightInfoStatusDecode);
-        
+                
         $dep = $flightInfoStatusDecode['FlightInfoStatusResult']['flights']['0']['origin']['code'];
         $arr = $flightInfoStatusDecode['FlightInfoStatusResult']['flights']['0']['destination']['code'];
         $depTime = $flightInfoStatusDecode['FlightInfoStatusResult']['flights']['0']['filed_departure_time']['time'];
@@ -76,7 +73,36 @@ $flightInfoStatus = $apiUrl . 'FlightInfoStatus?' . http_build_query($queryArray
         $arrDate = $flightInfoStatusDecode['FlightInfoStatusResult']['flights']['0']['filed_arrival_time']['date'];
         $distance = $flightInfoStatusDecode['FlightInfoStatusResult']['flights']['0']['distance_filed'];
         $aircraft = $flightInfoStatusDecode['FlightInfoStatusResult']['flights']['0']['full_aircrafttype'];
-        print_r("$dep" . " $depDate " . "@ " . "$depTime " . " -> " . "$arr" . " $arrDate " . "@ " . "$arrTime" . " Distance Filed: " . "$distance " . "$aircraft ");
+        
+?>
+
+<table border="2">
+    <tr>
+        <th>Callsign</th>
+        <th>Departure</th>
+        <th>Departure Date</th>
+        <th>Departure Time</th>
+        <th>Arrival</th>
+        <th>Arrival Date</th>
+        <th>Arrival Time</th>
+        <th>Distance</th>
+        <th>Aircraft</th>
+    </tr>
+    <tr>
+        <td><? echo ${"callsign$x"}; ?></td>
+        <td><? print_r("$dep"); ?></td>
+        <td><? print_r("$depDate"); ?></td>
+        <td><? print_r("$depTime"); ?></td>
+        <td><? print_r("$arr"); ?></td>
+        <td><? print_r("$arrDate"); ?></td>
+        <td><? print_r("$arrTime"); ?></td>
+        <td><? print_r("$distance"); ?></td>
+        <td><? print_r("$aircraft"); ?></td>
+    </tr>
+</table>
+
+<?php
+        
     }
 }
 ?>
