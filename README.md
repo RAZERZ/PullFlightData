@@ -1,5 +1,5 @@
 # PullFlightData
-Pulls flight data for arriving and departing SAS aircraft in input ICAO, and then pulls other info from flightaware api.
+Pulls flight data for arriving and departing SAS aircraft from input ICAO, and then pulls other info from flightaware api.
 
 # Purpose:
 
