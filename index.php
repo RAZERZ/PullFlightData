@@ -64,38 +64,50 @@ foreach($flightsArray as $flight) {
         $distance = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['distance_filed'];
         $aircraft = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['full_aircrafttype'];
         $tailnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['tailnumber'];
+        $airline = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['airline'];
+        $fnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['flightnumber'];
         
-        if(empty($arrTime)) $arrTime = "NA";
-        if(empty($arrDate)) $arrDate = "NA";
-        if(empty($aircraft)) $aircraft = "NA";
+        if(empty($arrTime)) $arrTime = "";
+        if(empty($arrDate)) $arrDate = "";
+        if(empty($aircraft)) $aircraft = "";
         
-        error_reporting( error_reporting() & ~E_NOTICE )
+        error_reporting( error_reporting() & ~E_NOTICE );
 ?>
 <center>
 <table border="1" style="margin-top:1%;">
     <tr>
-        <th>Callsign</th>
+        <th>Airline</th>
+        <th>Flightnumber</th>
         <th>Departure</th>
-        <th>Departure Date</th>
-        <th>Departure Time</th>
         <th>Arrival</th>
-        <th>Arrival Date</th>
-        <th>Arrival Time</th>
-        <th>Distance</th>
-        <th>Aircraft</th>
+        <th>Route</th>
         <th>Tailnumber</th>
+        <th>Distance</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Flight Time</th>
+        <th>Notes</th>
+        <th>Price</th>
+        <th>Flight Type</th>
+        <th>Daysofweek</th>
+        <th>Enabled</th>
     </tr>
     <tr>
-        <td><? echo ${"callsign$x"}; ?></td>
+        <td><? print_r("$airline"); ?></td>
+        <td><? print_r("$fnumber"); ?></td>
         <td><? print_r("$dep"); ?></td>
-        <td><? print_r("$depDate"); ?></td>
-        <td><? print_r("$depTime"); ?></td>
         <td><? print_r("$arr"); ?></td>
-        <td><? print_r("$arrDate"); ?></td>
-        <td><? print_r("$arrTime"); ?></td>
-        <td><? print_r("$distance"); ?></td>
-        <td><? print_r("$aircraft"); ?></td>
+        <td>N/A</td>
         <td><? print_r("$tailnumber"); ?></td>
+        <td><? print_r("$distance"); ?></td>
+        <td><? print_r("$depTime"); ?></td>
+        <td><? print_r("$arrTime"); ?></td>
+        <td>N/A</td>
+        <td></td>
+        <td>160</td>
+        <td>P</td>
+        <td>123456</td>
+        <td>1</td>
     </tr>
 </table>
 </center>
@@ -134,28 +146,38 @@ foreach($flightsArray as $flight) {
 <center>
 <table border="1" style="margin-top:1%;">
     <tr>
-        <th>Callsign</th>
+        <th>Airline</th>
+        <th>Flightnumber</th>
         <th>Departure</th>
-        <th>Departure Date</th>
-        <th>Departure Time</th>
         <th>Arrival</th>
-        <th>Arrival Date</th>
-        <th>Arrival Time</th>
-        <th>Distance</th>
-        <th>Aircraft</th>
+        <th>Route</th>
         <th>Tailnumber</th>
+        <th>Distance</th>
+        <th>Departure Time</th>
+        <th>Arrival Time</th>
+        <th>Flight Time</th>
+        <th>Notes</th>
+        <th>Price</th>
+        <th>Flight Type</th>
+        <th>Daysofweek</th>
+        <th>Enabled</th>
     </tr>
     <tr>
-        <td><? echo ${"callsign$x"}; ?></td>
+        <td><? print_r("$airline"); ?></td>
+        <td><? print_r("$fnumber"); ?></td>
         <td><? print_r("$dep"); ?></td>
-        <td><? print_r("$depDate"); ?></td>
-        <td><? print_r("$depTime"); ?></td>
         <td><? print_r("$arr"); ?></td>
-        <td><? print_r("$arrDate"); ?></td>
-        <td><? print_r("$arrTime"); ?></td>
-        <td><? print_r("$distance"); ?></td>
-        <td><? print_r("$aircraft"); ?></td>
+        <td>N/A</td>
         <td><? print_r("$tailnumber"); ?></td>
+        <td><? print_r("$distance"); ?></td>
+        <td><? print_r("$depTime"); ?></td>
+        <td><? print_r("$arrTime"); ?></td>
+        <td>N/A</td>
+        <td></td>
+        <td>160</td>
+        <td>P</td>
+        <td>123456</td>
+        <td>1</td>
     </tr>
 </table>
 </center>
