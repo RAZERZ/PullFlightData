@@ -15,4 +15,4 @@ Documentation as well as better "formating" is coming soon :p.
 I included a json output of running the API with AirportBoards? and airline:SAS so you can try the code yourself.
 Just be sure to modify your php file to point to this json instead.
 
-TODO: Put the output in a csv file, add so you can enter airline of choice instead of only SAS.
+TODO: Include flight lever, this would require me to use FlightInfoStatus? query instead, add so you can enter airline of choice instead of only SAS.
