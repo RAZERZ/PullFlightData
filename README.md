@@ -5,7 +5,8 @@ Pulls flight data for arriving and departing SAS aircraft from input ICAO, and t
 
 When creating a virtual airline, you want to have the most recent schedules.
 This can be done by purchasing services. However, as a project, I wanted to do it for free using flightaware's API.
-I have come quite far, I now only need to output the data into a csv file since most virtual airlines use phpvms which uses this filetype for input.
+I have come quite far, it outputs the data into a csv file, however, I want to be able to getthe filed flight level.
+After that, it's done! (An artists work is never done, it's just 'abandoned' :p)
 
 The code isn't the prettiest, I wanted to make sure that it works enought that I can upload it to my github.
 Documentation as well as better "formating" is coming soon :p.
@@ -16,3 +17,5 @@ I included a json output of running the API with AirportBoards? and airline:SAS 
 Just be sure to modify your php file to point to this json instead.
 
 TODO: Include flight lever, this would require me to use FlightInfoStatus? query instead, add so you can enter airline of choice instead of only SAS.
+Add instructions on how to test using AiportBoards.json.
+Add. Inline. Comments.
