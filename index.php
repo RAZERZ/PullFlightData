@@ -1,4 +1,7 @@
 <form action="" method="post">
+	<p>
+		//I had to create a new flightaware account since I ran out of queries, right now, it gets all the arriving aircrafts. I am planning to add all the scheduled and all the departing as well. Printing them into a csv will be my final goal, I want everything else to be ready and the code to be clean and proper functioning (right now the code is just enough to get it to work).</p>
+    
     ICAO to pull data from: <input type="text" name="ICAO">
 </form>
 
@@ -31,6 +34,13 @@ if(isset($_POST['ICAO'])) {
 $flightsArray = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights'];
 $flightnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']['0']['ident']; 
 $sasCallsign = array();
+$totalArray = array('code','flightnum','depicao','arricao','route','aircraft','distance','deptime','arrtime','flighttime','notes','price','flighttype','daysofweek','enabled');
+
+$fp = fopen('total.csv', 'a');
+
+fputcsv($fp, $totalArray);
+
+fclose($fp);
     
 foreach($flightsArray as $flight) {
     $sasCallsign[] = $flight['ident'];
@@ -71,7 +81,16 @@ foreach($flightsArray as $flight) {
         if(empty($arrDate)) $arrDate = "";
         if(empty($aircraft)) $aircraft = "";
         
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
+        
+        $fp = fopen('total.csv', 'a');
+        
+        fputcsv($fp, $totalArray);
+        
+        fclose($fp);
+        
         error_reporting( error_reporting() & ~E_NOTICE );
+        
 ?>
 <center>
 <table border="1" style="margin-top:1%;">
@@ -115,6 +134,7 @@ foreach($flightsArray as $flight) {
         
     }
     
+
     $x = count($sasCallsign);
     $x--;
 ?>
@@ -136,12 +156,22 @@ foreach($flightsArray as $flight) {
         $distance = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['distance_filed'];
         $aircraft = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['full_aircrafttype'];
         $tailnumber = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['tailnumber'];
+        $fnumber = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['flightnumber'];
+
         
         if(empty($arrTime)) $arrTime = "NA";
         if(empty($arrDate)) $arrDate = "NA";
         if(empty($aircraft)) $aircraft = "NA";
         
-        error_reporting( error_reporting() & ~E_NOTICE )
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
+        
+        $fp = fopen('total.csv', 'a');
+        
+        fputcsv($fp, $totalArray);
+        
+        fclose($fp);
+        
+        error_reporting( error_reporting() & ~E_NOTICE );
 ?>
 <center>
 <table border="1" style="margin-top:1%;">
