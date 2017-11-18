@@ -10,8 +10,8 @@
 if(isset($_POST['ICAO'])) {
     $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "yourFlightAwareID";
-    $apiKey = "yourFlightAwareApiKey";
+    $apiUserId = "EdwardSnowden";
+    $apiKey = "4d4b2213088e45ba21263e18961d8b74824f3ab2";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
@@ -34,7 +34,7 @@ if(isset($_POST['ICAO'])) {
 $flightsArray = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights'];
 $flightnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']['0']['ident']; 
 $sasCallsign = array();
-$totalArray = array('code','flightnum','depicao','arricao','route','aircraft','distance','deptime','arrtime','flighttime','notes','price','flighttype','daysofweek','enabled');
+$totalArray = array('code','flightnum','depicao','arricao','route','aircraft','flightlevel','distance','deptime','arrtime','flighttime','notes','price','flighttype','daysofweek','enabled');
 
 $fp = fopen('total.csv', 'a');
 
@@ -81,7 +81,7 @@ foreach($flightsArray as $flight) {
         if(empty($arrDate)) $arrDate = "";
         if(empty($aircraft)) $aircraft = "";
         
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
         
         $fp = fopen('total.csv', 'a');
         
@@ -101,6 +101,7 @@ foreach($flightsArray as $flight) {
         <th>Arrival</th>
         <th>Route</th>
         <th>Tailnumber</th>
+        <th>FlightLevel</th>
         <th>Distance</th>
         <th>Departure Time</th>
         <th>Arrival Time</th>
@@ -118,6 +119,7 @@ foreach($flightsArray as $flight) {
         <td><? print_r("$arr"); ?></td>
         <td>N/A</td>
         <td><? print_r("$tailnumber"); ?></td>
+        <td>0</td>
         <td><? print_r("$distance"); ?></td>
         <td><? print_r("$depTime"); ?></td>
         <td><? print_r("$arrTime"); ?></td>
@@ -163,7 +165,7 @@ foreach($flightsArray as $flight) {
         if(empty($arrDate)) $arrDate = "NA";
         if(empty($aircraft)) $aircraft = "NA";
         
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
         
         $fp = fopen('total.csv', 'a');
         
@@ -182,6 +184,7 @@ foreach($flightsArray as $flight) {
         <th>Arrival</th>
         <th>Route</th>
         <th>Tailnumber</th>
+        <th>FlightLevel</th>
         <th>Distance</th>
         <th>Departure Time</th>
         <th>Arrival Time</th>
@@ -199,6 +202,7 @@ foreach($flightsArray as $flight) {
         <td><? print_r("$arr"); ?></td>
         <td>N/A</td>
         <td><? print_r("$tailnumber"); ?></td>
+        <td>0</td>
         <td><? print_r("$distance"); ?></td>
         <td><? print_r("$depTime"); ?></td>
         <td><? print_r("$arrTime"); ?></td>
