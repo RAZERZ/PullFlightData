@@ -17,6 +17,11 @@ Documentation as well as better "formating" is coming soon :p.
 I included a json output of running the API with AirportBoards? and airline:SAS so you can try the code yourself.
 Just be sure to modify your php file to point to this json instead.
 
-TODO: Include flight level (currently it is set to 0 because so few planes seem to file altitude), add so you can enter airline of choice instead of only SAS.
-Add instructions on how to test using AiportBoards.json.
-Add. Inline. Comments.
+# TODO: 
+
+- Include flight level (currently it is set to 0 because so few planes seem to file altitude).
+- Add so you can enter airline of choice instead of only SAS.
+- Add instructions on how to test using AiportBoards.json.
+- Add. Inline. Comments.
+- Remove AM/PM from the time.
+- Add flight time.
