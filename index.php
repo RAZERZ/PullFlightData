@@ -1,19 +1,24 @@
 <form action="" method="post">
-    ICAO to pull data from: <input type="text" name="ICAO">
+    3 letter airline code to pull data from: <input type="text" name="airline">
+    ICAO to pull data from: <input type="text" name="ICAO"> <br>
+    <input type="submit">
 </form>
 
 <?php
 
-if(isset($_POST['ICAO'])) {
-    $ICAO = trim($_POST['ICAO']);
+if(isset($_POST['airline'])) {
+    $airline = trim($_POST['airline']);
+
+    if(isset($_POST['ICAO'])) {
+        $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "yourFlightAwareID";
-    $apiKey = "yourFlightAwareApiKey";
+    $apiUserId = "EdwardSnowden";
+    $apiKey = "4d4b2213088e45ba21263e18961d8b74824f3ab2";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
         'airport_code' => $ICAO,
-        'filter' => 'airline:SAS'
+        'filter' => 'airline:' . $airline
     );
     
     $queryUrl = $apiUrl . 'AirportBoards?' . http_build_query($queryArray);
@@ -33,7 +38,7 @@ $flightnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['fligh
 $sasCallsign = array();
 $totalArray = array('code','flightnum','depicao','arricao','route','aircraft','flightlevel','distance','deptime','arrtime','flighttime','notes','price','flighttype','daysofweek','enabled');
 
-$fp = fopen('total.csv', 'a');
+$fp = fopen('schedules.csv', 'a');
 
 fputcsv($fp, $totalArray);
 
@@ -78,9 +83,9 @@ foreach($flightsArray as $flight) {
         if(empty($arrDate)) $arrDate = "";
         if(empty($aircraft)) $aircraft = "";
         
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "Pulled using Rami's code plugin", "160", "P", "123456", "1");
         
-        $fp = fopen('total.csv', 'a');
+        $fp = fopen('schedules.csv', 'a');
         
         fputcsv($fp, $totalArray);
         
@@ -162,9 +167,9 @@ foreach($flightsArray as $flight) {
         if(empty($arrDate)) $arrDate = "NA";
         if(empty($aircraft)) $aircraft = "NA";
         
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "Pulled using Rami's code plugin", "160", "P", "123456", "1");
         
-        $fp = fopen('total.csv', 'a');
+        $fp = fopen('schedules.csv', 'a');
         
         fputcsv($fp, $totalArray);
         
@@ -213,6 +218,8 @@ foreach($flightsArray as $flight) {
 </table>
 </center>
 <?php   
+        }
     }
 }
+
 ?>
