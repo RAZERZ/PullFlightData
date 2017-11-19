@@ -1,7 +1,4 @@
 <form action="" method="post">
-	<p>
-		//I had to create a new flightaware account since I ran out of queries, right now, it gets all the arriving aircrafts. I am planning to add all the scheduled and all the departing as well. Printing them into a csv will be my final goal, I want everything else to be ready and the code to be clean and proper functioning (right now the code is just enough to get it to work).</p>
-    
     ICAO to pull data from: <input type="text" name="ICAO">
 </form>
 
@@ -10,8 +7,8 @@
 if(isset($_POST['ICAO'])) {
     $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "EdwardSnowden";
-    $apiKey = "4d4b2213088e45ba21263e18961d8b74824f3ab2";
+    $apiUserId = "yourFlightAwareID";
+    $apiKey = "yourFlightAwareApiKey";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
