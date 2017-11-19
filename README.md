@@ -16,6 +16,8 @@ Documentation as well as better "formating" is coming soon :p.
 
 I included a json output of running the API with AirportBoards? and airline:SAS so you can try the code yourself.
 Just be sure to modify your php file to point to this json instead.
+Oh and btw, you're free to use the api keys and id you found here, they're from a free account which anyone can create.
+However, I do encourage you to create your own account and not rely on hoping that no-ones wastes all the queries in one go :).
 
 # TODO: 
 
