@@ -26,3 +26,4 @@ However, I do encourage you to create your own account and not rely on hoping th
 - Add. Inline. Comments.
 - Add flight time.
 - Add route (believe it or not, some actually file this).
+- Add so that you can run it for a week for it to collect info without overwriting data already stored in the csv file.
