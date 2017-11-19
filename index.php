@@ -12,8 +12,8 @@ if(isset($_POST['airline'])) {
     if(isset($_POST['ICAO'])) {
         $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "yourFlightAwareID";
-    $apiKey = "yourFlightAwareApiKey";
+    $apiUserId = "EdwardSnowden";
+    $apiKey = "4d4b2213088e45ba21263e18961d8b74824f3ab2";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
@@ -69,8 +69,8 @@ foreach($flightsArray as $flight) {
         
         $dep = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['origin']['code'];
         $arr = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['destination']['code'];
-        $depTime = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_departure_time']['time'];
-        $arrTime = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_arrival_time']['time'];
+        $depTime = substr($queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_departure_time']['time'], 0, 5);
+        $arrTime = substr($queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_arrival_time']['time'], 0, 5);
         $distance = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['distance_filed'];
         $aircraft = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['full_aircrafttype'];
         $tailnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['tailnumber'];
@@ -151,8 +151,8 @@ foreach($flightsArray as $flight) {
         
         $dep = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['origin']['code'];
         $arr = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['destination']['code'];
-        $depTime = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_departure_time']['time'];
-        $arrTime = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_arrival_time']['time'];
+        $depTime = substr($queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_departure_time']['time'], 0, 5);
+        $arrTime = substr($queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_arrival_time']['time'], 0, 5);
         $distance = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['distance_filed'];
         $aircraft = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['full_aircrafttype'];
         $tailnumber = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['tailnumber'];
