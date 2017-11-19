@@ -20,7 +20,6 @@ Just be sure to modify your php file to point to this json instead.
 # TODO: 
 
 - Include flight level (currently it is set to 0 because so few planes seem to file altitude).
-- Add so you can enter airline of choice instead of only SAS.
 - Add instructions on how to test using AiportBoards.json.
 - Add. Inline. Comments.
 - Remove AM/PM from the time.
