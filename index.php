@@ -80,7 +80,7 @@ foreach($flightsArray as $flight) {
         $totalArrTime = new DateTime($arrTime);
         $interval = $totalDepTime->diff($totalArrTime);
 
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "Pulled using Rami's code plugin", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, $interval->format("%H" . ":". "%i"), "Pulled using Rami's code plugin", "160", "P", "123456", "1");
         
         $fp = fopen('schedules.csv', 'a');
         
@@ -160,7 +160,7 @@ foreach($flightsArray as $flight) {
         $totalArrTime = new DateTime($arrTime);
         $interval = $totalDepTime->diff($totalArrTime);
         
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, "N/A", "Pulled using Rami's code plugin", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, $interval->format("%H" . ":" . "%i"), "Pulled using Rami's code plugin", "160", "P", "123456", "1");
         
         $fp = fopen('schedules.csv', 'a');
         
