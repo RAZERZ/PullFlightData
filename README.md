@@ -24,6 +24,5 @@ However, I do encourage you to create your own account and not rely on hoping th
 - Include flight level (currently it is set to 0 because so few planes seem to file altitude).
 - Add instructions on how to test using AiportBoards.json.
 - Add. Inline. Comments.
-- Add flight time.
 - Add route (believe it or not, some actually file this).
 - Add so that you can run it for a week for it to collect info without overwriting data already stored in the csv file.
