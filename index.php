@@ -12,8 +12,8 @@ if(isset($_POST['airline'])) {
     if(isset($_POST['ICAO'])) {
         $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "yourFlightAwareID";
-    $apiKey = "yourFlightAwareApiKey";
+    $apiUserId = "EdwardSnowden";
+    $apiKey = "4d4b2213088e45ba21263e18961d8b74824f3ab2";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
@@ -36,7 +36,7 @@ if(isset($_POST['airline'])) {
 $flightsArray = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights'];
 $flightnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']['0']['ident']; 
 $sasCallsign = array();
-$totalArray = array('code','flightnum','depicao','arricao','route','aircraft','flightlevel','distance','deptime','arrtime','flighttime','notes','price','flighttype','daysofweek','enabled');
+$totalArray = array();
 
 $fp = fopen('schedules.csv', 'a');
 
@@ -69,9 +69,11 @@ foreach($flightsArray as $flight) {
         
         $dep = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['origin']['code'];
         $arr = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['destination']['code'];
+        $route = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['route'];
         $depTime = date("H:i", strtotime($queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_departure_time']['time']));
         $arrTime = date("H:i", strtotime($queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_arrival_time']['time']));
         $distance = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['distance_filed'];
+        $altitude = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['filed_altitude'];
         $aircraft = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['full_aircrafttype'];
         $tailnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['tailnumber'];
         $airline = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']["$x"]['airline'];
@@ -80,7 +82,10 @@ foreach($flightsArray as $flight) {
         $totalArrTime = new DateTime($arrTime);
         $interval = $totalDepTime->diff($totalArrTime);
 
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, $interval->format("%H" . ":". "%i"), "Pulled using Rami's code plugin", "160", "P", "123456", "1");
+        if(empty($route)) $route = "";
+        if(empty($altitude)) $altitude = "";
+
+        $totalArray = array($airline, $fnumber, $dep, $arr, $route, $tailnumber, $altitude, $distance, $depTime, $arrTime, $interval->format("%H" . ":". "%i"), "Pulled using Rami's code plugin", "160", "P", "123456", "1");
         
         $fp = fopen('schedules.csv', 'a');
         
@@ -116,9 +121,9 @@ foreach($flightsArray as $flight) {
         <td><? print_r("$fnumber"); ?></td>
         <td><? print_r("$dep"); ?></td>
         <td><? print_r("$arr"); ?></td>
-        <td>N/A</td>
+        <td><? print_r("$route"); ?></td>
         <td><? print_r("$tailnumber"); ?></td>
-        <td>0</td>
+        <td><? print_r("$altitude"); ?></td>
         <td><? print_r("$distance"); ?></td>
         <td><? print_r($depTime); ?></td>
         <td><? print_r($arrTime); ?></td>
@@ -150,17 +155,22 @@ foreach($flightsArray as $flight) {
         
         $dep = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['origin']['code'];
         $arr = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['destination']['code'];
+        $route = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['route'];
         $depTime = date("H:i", strtotime($queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_departure_time']['time']));
         $arrTime = date("H:i", strtotime($queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_arrival_time']['time']));
         $distance = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['distance_filed'];
         $aircraft = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['full_aircrafttype'];
         $tailnumber = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['tailnumber'];
         $fnumber = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['flightnumber'];
+        $altitude = $queryResultJsonDecode['AirportBoardsResult']['departures']['flights']["$x"]['filed_altitude'];
         $totalDepTime = new DateTime($depTime);
         $totalArrTime = new DateTime($arrTime);
         $interval = $totalDepTime->diff($totalArrTime);
+
+        if(empty($route)) $route = "";
+        if(empty($altitude)) $altitude = "";
         
-        $totalArray = array($airline, $fnumber, $dep, $arr, "N/A", $tailnumber, "0", $distance, $depTime, $arrTime, $interval->format("%H" . ":" . "%i"), "Pulled using Rami's code plugin", "160", "P", "123456", "1");
+        $totalArray = array($airline, $fnumber, $dep, $arr, $route, $tailnumber, $altitude, $distance, $depTime, $arrTime, $interval->format("%H" . ":" . "%i"), "Pulled using Rami's code plugin", "160", "P", "123456", "1");
         
         $fp = fopen('schedules.csv', 'a');
         
@@ -195,9 +205,9 @@ foreach($flightsArray as $flight) {
         <td><? print_r("$fnumber"); ?></td>
         <td><? print_r("$dep"); ?></td>
         <td><? print_r("$arr"); ?></td>
-        <td>N/A</td>
+        <td><? print_r("$route"); ?></td>
         <td><? print_r("$tailnumber"); ?></td>
-        <td>0</td>
+        <td><? print_r("$altitude"); ?></td>
         <td><? print_r("$distance"); ?></td>
         <td><? print_r("$depTime"); ?></td>
         <td><? print_r("$arrTime"); ?></td>
