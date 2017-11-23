@@ -21,5 +21,5 @@ However, I do encourage you to create your own account and not rely on hoping th
 
 # TODO: 
 
-- Add. Inline. Comments.
+- Add. Inline. Comments. //For the index.php
 - Add so that you can run it for a week for it to collect info without overwriting data already stored in the csv file.
