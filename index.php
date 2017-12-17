@@ -12,8 +12,8 @@ if(isset($_POST['airline'])) {
     if(isset($_POST['ICAO'])) {
         $ICAO = trim($_POST['ICAO']);
     
-    $apiUserId = "EdwardSnowden";
-    $apiKey = "4d4b2213088e45ba21263e18961d8b74824f3ab2";
+    $apiUserId = "yourflightawareid";
+    $apiKey = "yourflightawareapikey";
     $apiUrl = "https://flightxml.flightaware.com/json/FlightXML3/";
     
     $queryArray = array(
@@ -36,7 +36,7 @@ if(isset($_POST['airline'])) {
 $flightsArray = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights'];
 $flightnumber = $queryResultJsonDecode['AirportBoardsResult']['arrivals']['flights']['0']['ident']; 
 $sasCallsign = array();
-$totalArray = array();
+$totalArray = array('code','flightnum','depicao','arricao','route','aircraft','flightlevel','distance','deptime','arrtime','flighttime','notes','price','flighttype','daysofweek','enabled');
 
 $fp = fopen('schedules.csv', 'a');
 
@@ -63,7 +63,7 @@ foreach($flightsArray as $flight) {
     <p style="font-size:120%;"><b>Arrivals</b></p><hr>
 </center>
 
-<?
+<?php
     
     for($x; $x >= 0; $x--) {
         
@@ -117,17 +117,17 @@ foreach($flightsArray as $flight) {
         <th>Enabled</th>
     </tr>
     <tr>
-        <td><? print_r("$airline"); ?></td>
-        <td><? print_r("$fnumber"); ?></td>
-        <td><? print_r("$dep"); ?></td>
-        <td><? print_r("$arr"); ?></td>
-        <td><? print_r("$route"); ?></td>
-        <td><? print_r("$tailnumber"); ?></td>
-        <td><? print_r("$altitude"); ?></td>
-        <td><? print_r("$distance"); ?></td>
-        <td><? print_r($depTime); ?></td>
-        <td><? print_r($arrTime); ?></td>
-        <td><? echo $interval->format("%H" . ":" . "%i"); ?></td>
+        <td><?php print_r("$airline"); ?></td>
+        <td><?php print_r("$fnumber"); ?></td>
+        <td><?php print_r("$dep"); ?></td>
+        <td><?php print_r("$arr"); ?></td>
+        <td><?php print_r("$route"); ?></td>
+        <td><?php print_r("$tailnumber"); ?></td>
+        <td><?php print_r("$altitude"); ?></td>
+        <td><?php print_r("$distance"); ?></td>
+        <td><?php print_r($depTime); ?></td>
+        <td><?php print_r($arrTime); ?></td>
+        <td><?php echo $interval->format("%H" . ":" . "%i"); ?></td>
         <td></td>
         <td>160</td>
         <td>P</td>
@@ -149,7 +149,7 @@ foreach($flightsArray as $flight) {
     <p style="font-size:120%;"><b>Departures</b></p><hr>
 </center>
 
-<?
+<?php
     
     for($x; $x >= 0; $x--) {
         
@@ -201,17 +201,17 @@ foreach($flightsArray as $flight) {
         <th>Enabled</th>
     </tr>
     <tr>
-        <td><? print_r("$airline"); ?></td>
-        <td><? print_r("$fnumber"); ?></td>
-        <td><? print_r("$dep"); ?></td>
-        <td><? print_r("$arr"); ?></td>
-        <td><? print_r("$route"); ?></td>
-        <td><? print_r("$tailnumber"); ?></td>
-        <td><? print_r("$altitude"); ?></td>
-        <td><? print_r("$distance"); ?></td>
-        <td><? print_r("$depTime"); ?></td>
-        <td><? print_r("$arrTime"); ?></td>
-        <td><? print_r($interval->format("%H" . ":" . "%I")); ?></td>
+        <td><?php print_r("$airline"); ?></td>
+        <td><?php print_r("$fnumber"); ?></td>
+        <td><?php print_r("$dep"); ?></td>
+        <td><?php print_r("$arr"); ?></td>
+        <td><?php print_r("$route"); ?></td>
+        <td><?php print_r("$tailnumber"); ?></td>
+        <td><?php print_r("$altitude"); ?></td>
+        <td><?php print_r("$distance"); ?></td>
+        <td><?php print_r("$depTime"); ?></td>
+        <td><?php print_r("$arrTime"); ?></td>
+        <td><?php print_r($interval->format("%H" . ":" . "%I")); ?></td>
         <td></td>
         <td>160</td>
         <td>P</td>
