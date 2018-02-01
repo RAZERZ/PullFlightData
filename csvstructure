@@ -1,0 +1,3 @@
+code, flightnum, depicao, arricao, route, tailnum, flightlevel, distance, deptime, arrtime, flighttime, notes, price, flighttype, daysofweek, enabled
+
+IE: SAS, 488, ESSA, ENGM, ARS N727 ESEBA, LN-RRH, 26000, 160, 1600z, 1630z, 0030, Generated with Rami's code, 160, P, 123456, 1

@@ -9,17 +9,13 @@ I have come quite far, it outputs the data into a csv file, however, I want to b
 The only hinder here being that a lot of planes don't file altitude (see the json file, only one of all those aircrafts filed an altitude).
 After that, it's done! (An artists work is never done, it's just 'abandoned' :p)
 
-The code isn't the prettiest, I wanted to make sure that it works enought that I can upload it to my github.
-Documentation as well as better "formating" is coming soon :p.
-
 # Notice:
 
 I included a json output of running the API with AirportBoards? and airline:SAS so you can try the code yourself.
-Just be sure to modify your php file to point to this json instead.
+To use this just run the puller.php in TestFiles/ :)
 Oh and btw, you're free to use the api keys and id you found here, they're from a free account which anyone can create.
 However, I do encourage you to create your own account and not rely on hoping that no-ones wastes all the queries in one go :).
 
 # TODO: 
 
-- Add. Inline. Comments. //For the index.php
-- Add so that you can run it for a week for it to collect info without overwriting data already stored in the csv file.
+- Come with suggestions!
