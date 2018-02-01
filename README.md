@@ -1,5 +1,61 @@
 # PullFlightData
-Pulls flight data for arriving and departing SAS aircraft from input ICAO, and then pulls other info from flightaware api.
+Pulls flight data for arriving, departing, and enroute traffic for specified airline and specified ICAO
+
+# Installation:
+
+You need to create a flightxml API account (check the thread on how to do so) so you can link it to the php.
+It uses cron job to run it for a week to collect all the flights,
+and stores it all in a database table.
+
+So you need an OS capable of creating cron jobs, and access to some database.
+
+- First of all, you need to open up the puller.php in Program/
+Then go to line #12 and change the variable value to the ICAO which you want to pull data from, do the same with the airline (use the three letter code for your airline, ie. Scandinavian Airlines = SAS)
+
+- Second of all, you need to create a database, do so by running:
+```SQL
+CREATE DATABASE FligthAwarePuller;
+```
+
+- Now we need to create a table in that database so we can send the data to it:
+```SQL
+CREATE TABLE `flights` (
+  `code` varchar(3) DEFAULT NULL,
+  `flightnum` varchar(6) DEFAULT NULL,
+  `depicao` varchar(4) DEFAULT NULL,
+  `arricao` varchar(4) DEFAULT NULL,
+  `route` varchar(255) DEFAULT NULL,
+  `tailnum` varchar(6) DEFAULT NULL,
+  `flightlevel` varchar(7) DEFAULT NULL,
+  `distance` varchar(7) DEFAULT NULL,
+  `deptime` varchar(7) DEFAULT NULL,
+  `arrtime` varchar(7) DEFAULT NULL,
+  `flighttime` varchar(7) DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `price` int(11) DEFAULT NULL,
+  `flighttype` varchar(8) DEFAULT NULL,
+  `daysofweek` int(11) DEFAULT NULL,
+  `enabled` bit(1) DEFAULT NULL
+);
+```
+That's it!
+- If you don't host your database locally from where you are running the script, change the mysql credentials on line #59.
+
+- Now, on to creating a cron job.
+I used a raspberry pi to do this, and it just requires a computer with php installed (it doesn't have to be a server, just as long as it can run 24/7),
+and mysql installed.
+After you have cloned the git repo, cd into the Program/ directory and type (using a Linux terminal in this case)
+```sh
+crontab -e
+```
+Now you can type in this to run the script every 15 minutes (once the clock strikes either 00, 15, 30, 45):
+```sh
+*/15 * * * * /usr/bin/php -f /var/www/root/Program/puller.php >> /var/log/apache2/crontab.log
+```
+Change the directories to match your "homemade server" :).
+It will create a log file in said directory in case there is any issues ;).
+
+That's it! Sit back, relax, and watch!
 
 # Purpose:
 
