@@ -9,10 +9,10 @@ $apiUserId = "yourFlightAwareUserId";
 $apiKey = "yourFlightAwareApiKey";
 
 //The script needs to know which airport to pull the data from, change the value to whatever ICAO your airline uses as base
-$ICAO = 'ICAO'; //TODO: Include in README
+$ICAO = 'ICAO';
 
 //Use the three letter ICAO for your airline
-$airline = 'CODE'; //TODO: Include in README
+$airline = 'ICAO';
 
 //We create a class which takes care of all the authentication happening in FlightAware
 class API {
@@ -56,12 +56,11 @@ function flights($decodedResult, $position) { //Position is either 'arrival' or 
     foreach($positionState as $flight) {
 
         //We need to make a connection to the database, we use SQL
-        $mysql = new mysqli('localhost', 'root', '', 'FlightAwarePuller'); //TODO: Include in README
+        $mysql = new mysqli('localhost', 'root', '', 'FlightAwarePuller');
 
         //We should set some variables to make it easier
         $callsign = $flight['ident'];
         $depIcao = $flight['origin']['code'];
-        echo "$depIcao<br>";
         $arrIcao = $flight['destination']['code'];
         $tailnumber = $flight['tailnumber'];
         $distance = $flight['distance_filed']; //We use the filed one to match the irl schedules, not irl events
